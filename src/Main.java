@@ -24,7 +24,7 @@ public class Main implements Actions {
     }
 
     public void add() {
-      sameLines();
+        sameLines();
         sum = first + second;
         System.out.println("result is: " + sum);
         options();
@@ -32,7 +32,7 @@ public class Main implements Actions {
     }
 
     public void substract() {
-   sameLines();
+        sameLines();
         sum = first - second;
         System.out.println("result is: " + sum);
         options();
@@ -40,7 +40,7 @@ public class Main implements Actions {
     }
 
     public void multiply() {
-     sameLines();
+        sameLines();
         sum = first * second;
         System.out.println("result is: " + sum);
         options();
@@ -65,7 +65,10 @@ public class Main implements Actions {
                 case 2 -> substract();
                 case 3 -> multiply();
                 case 4 -> divide();
-                case 0 -> start = false;
+                case 0 -> {
+                    start = false;
+                    sc.close();
+                }
             }
         }
     }
