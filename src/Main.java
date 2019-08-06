@@ -1,16 +1,19 @@
 import java.util.Scanner;
 
-public class Main implements Actions {
+public class Main {
+
     Scanner sc = new Scanner(System.in);
-    private static double first;
-    private static double second;
-    private static double sum;
+    private double first;
+    private double second;
+    private double sum;
+
 
     public static void main(String[] args) {
 
         Main main = new Main();
         main.options();
         main.doOption();
+
     }
 
     void options() {
@@ -56,9 +59,19 @@ public class Main implements Actions {
         doOption();
     }
 
+    void sameLines() {
+        System.out.println("give first number: ");
+        first = sc.nextDouble();
+        sc.nextLine();
+        System.out.println("give second number: ");
+        second = sc.nextDouble();
+        sc.nextLine();
+    }
+
     void doOption() {
-        int number = sc.nextInt();
         boolean start = true;
+        int number = sc.nextInt();
+        sc.nextLine();
         while (start) {
             switch (number) {
                 case 1 -> add();
@@ -67,17 +80,25 @@ public class Main implements Actions {
                 case 4 -> divide();
                 case 0 -> {
                     start = false;
-                    sc.close();
+                    close();
+                }
+                default -> {
+                    System.out.println("Wrong option");
+                    options();
+                    doOption();
                 }
             }
+
         }
     }
 
-    void sameLines() {
-        System.out.println("give first number: ");
-        first = sc.nextDouble();
-        System.out.println("Give second number: ");
-        second = sc.nextDouble();
+    void close() {
+        sc.close();
+    }
+
+
+    void exit() {
+        System.out.println("goodbye");
     }
 }
 
