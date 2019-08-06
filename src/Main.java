@@ -79,8 +79,9 @@ public class Main {
                 case 3 -> multiply();
                 case 4 -> divide();
                 case 0 -> {
+                    System.out.println("Goodbye");
                     start = false;
-                    close();
+                    System.exit(0);
                 }
                 default -> {
                     System.out.println("Wrong option");
@@ -88,17 +89,6 @@ public class Main {
                     doOption();
                 }
             }
-
         }
     }
-
-    void close() {
-        sc.close();
-    }
-
-
-    void exit() {
-        System.out.println("goodbye");
-    }
 }
-
