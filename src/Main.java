@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -5,7 +6,7 @@ public class Main {
     Scanner sc = new Scanner(System.in);
     private double first;
     private double second;
-    private double sum;
+    private double result;
 
 
     public static void main(String[] args) {
@@ -26,69 +27,81 @@ public class Main {
 
     }
 
+    double getNumberFromUser() {
+        return sc.nextDouble();
+    }
+
     public void add() {
         sameLines();
-        sum = first + second;
-        System.out.println("result is: " + sum);
+        result = first + second;
+        System.out.println("result is: " + result);
         options();
-        doOption();
     }
 
     public void substract() {
         sameLines();
-        sum = first - second;
-        System.out.println("result is: " + sum);
+        result = first - second;
+        System.out.println("result is: " + result);
         options();
-        doOption();
+
     }
 
     public void multiply() {
         sameLines();
-        sum = first * second;
-        System.out.println("result is: " + sum);
+        result = first * second;
+        System.out.println("result is: " + result);
         options();
-        doOption();
     }
 
     public void divide() {
         sameLines();
-        if (second == 0) throw new IllegalArgumentException("You can not divide by 0");
-        sum = first / second;
-        System.out.println("result is: " + sum);
+        if (second == 0) {
+            result = 0;
+            System.err.println("You can not divide by 0.");
+        } else
+            result = first / second;
+        System.out.println("result is: " + result);
         options();
-        doOption();
+
     }
 
     void sameLines() {
         System.out.println("give first number: ");
-        first = sc.nextDouble();
+        first = getNumberFromUser();
         sc.nextLine();
         System.out.println("give second number: ");
-        second = sc.nextDouble();
+        second = getNumberFromUser();
         sc.nextLine();
     }
 
     void doOption() {
+        int number = 0;
         boolean start = true;
-        int number = sc.nextInt();
-        sc.nextLine();
         while (start) {
-            switch (number) {
-                case 1 -> add();
-                case 2 -> substract();
-                case 3 -> multiply();
-                case 4 -> divide();
-                case 0 -> {
-                    System.out.println("Goodbye");
-                    start = false;
-                    System.exit(0);
-                }
-                default -> {
-                    System.out.println("Wrong option");
-                    options();
-                    doOption();
+            try {
+                number = (int) getNumberFromUser();
+            } catch (InputMismatchException e) {
+                System.err.println("You can use only numbers!");
+                number = (int) getNumberFromUser();
+            } finally {
+                switch (number) {
+                    case 1 -> add();
+                    case 2 -> substract();
+                    case 3 -> multiply();
+                    case 4 -> divide();
+                    case 0 -> {
+                        System.out.println("Goodbye");
+                        start = false;
+                    }
+                    default -> {
+                        System.out.println("Wrong option");
+                        options();
+                        doOption();
+                    }
+
                 }
             }
         }
     }
 }
+
